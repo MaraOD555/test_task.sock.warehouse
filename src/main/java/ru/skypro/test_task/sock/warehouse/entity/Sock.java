@@ -1,15 +1,16 @@
 package ru.skypro.test_task.sock.warehouse.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 /**
  * Сущность Sock для базы данных
  */
+
+
+
 /*
-@Table(name = "socks")
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode(exclude = "id")
 @NoArgsConstructor
 @AllArgsConstructor */
