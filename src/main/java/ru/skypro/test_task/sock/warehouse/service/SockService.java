@@ -2,8 +2,6 @@ package ru.skypro.test_task.sock.warehouse.service;
 
 import ru.skypro.test_task.sock.warehouse.entity.Operation;
 import ru.skypro.test_task.sock.warehouse.entity.Sock;
-
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,23 +45,9 @@ public interface SockService {
      * @param sock
      */
     void outcome(Sock sock);
-    /**
-     * Возвращает носки с параметрами GreaterThan
-     *
-     * @param color цвет
-     * @param cottonPart процент содержания хлопка
-     */
-    //   List<Sock> findByColorAndCottonPartGreaterThan(String color, int cottonPart);
-    /**
-     * Возвращает носки с параметрами LessThan
-     *
-     * @param color цвет
-     * @param cottonPart процент содержания хлопка
-     */
-   // List<Sock> findByColorAndCottonPartLessThan(String color, int cottonPart);
 
     /**
-     * Возвращает носки с параметрами LessThan
+     * Возвращает носки с параметрами EQUAL
      *
      * @param color цвет
      * @param cottonPart процент содержания хлопка

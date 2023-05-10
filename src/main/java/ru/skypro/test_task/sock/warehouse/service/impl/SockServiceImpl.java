@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.test_task.sock.warehouse.entity.Operation;
 import ru.skypro.test_task.sock.warehouse.entity.Sock;
 import ru.skypro.test_task.sock.warehouse.exception.CustomException;
@@ -35,13 +34,6 @@ public class SockServiceImpl implements SockService {
 
     @Override
     public String countSocks(String color, int cottonPart, Operation operation) {
-
-        /*     switch (operation) {
-            case MORE_THAN: return countQuantities(findByColorAndCottonPartGreaterThan(color, cottonPart));
-            case LESS_THAN: return countQuantities(findByColorAndCottonPartLessThan(color, cottonPart));
-            case EQUAL: return countQuantities(findByColorAndCottonPartEquals(color, cottonPart));
-            default: throw new CustomException("Операция некорректна", HttpStatus.BAD_REQUEST);
-        } */
         checkCottonPart(cottonPart);
         switch (operation) {
             case MORE_THAN: return countQuantities(sockRepository.findByColorAndCottonPartGreaterThan(color, cottonPart));
@@ -50,7 +42,6 @@ public class SockServiceImpl implements SockService {
             default: throw new CustomException("Операция некорректна", HttpStatus.BAD_REQUEST);
         }
     }
-
     @Override
     public void income(Sock sock) throws CustomException {
         check(sock);
@@ -62,7 +53,6 @@ public class SockServiceImpl implements SockService {
                         },
                         () -> save(sock));
     }
-
     @Override
     public void outcome(Sock sock) throws CustomException {
         check(sock);
@@ -78,17 +68,6 @@ public class SockServiceImpl implements SockService {
             throw new CustomException("Введенное количество превышает найденное", HttpStatus.BAD_REQUEST);
         }
     }
-
-   /* @Override
-    public List<Sock> findByColorAndCottonPartGreaterThan(String color, int cottonPart) throws CustomException {
-        checkCottonPart(cottonPart);
-        return sockRepository.findByColorAndCottonPartGreaterThan(color, cottonPart);
-    }
-    @Override
-    public List<Sock> findByColorAndCottonPartLessThan(String color, int cottonPart) throws CustomException{
-        checkCottonPart(cottonPart);
-        return sockRepository.findByColorAndCottonPartLessThan(color, cottonPart);
-    }*/
     @Override
     public Optional<Sock> findByColorAndCottonPartEquals(String color, int cottonPart) throws CustomException{
         checkCottonPart(cottonPart);
@@ -109,7 +88,7 @@ public class SockServiceImpl implements SockService {
      * Количество пар носков с диапозоном параметров (вспомогательный метод)
      * @param socks
      */
-    private String countQuantities(List<Sock> socks) {
+    String countQuantities(List<Sock> socks) {
         int numberSocks = 0;
         if (socks.size() > 0) {
             for (Sock sock: socks) {

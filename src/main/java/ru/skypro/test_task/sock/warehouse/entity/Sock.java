@@ -6,17 +6,11 @@ import lombok.*;
 /**
  * Сущность Sock для базы данных
  */
-
-
-
-/*
-@Data
-@EqualsAndHashCode(exclude = "id")
-@NoArgsConstructor
-@AllArgsConstructor */
 @Table(name = "socks")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Sock {
     @Id
@@ -28,4 +22,5 @@ public class Sock {
     private int cottonPart;
 
     private int quantity;
+
 }
