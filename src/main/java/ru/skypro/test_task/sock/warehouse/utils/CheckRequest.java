@@ -1,6 +1,5 @@
 package ru.skypro.test_task.sock.warehouse.utils;
 
-import org.springframework.http.HttpStatus;
 import ru.skypro.test_task.sock.warehouse.entity.Sock;
 import ru.skypro.test_task.sock.warehouse.exception.CustomException;
 
@@ -15,7 +14,7 @@ public class CheckRequest {
      */
     public static void checkCottonPart(int cottonPart) throws CustomException {
         if (cottonPart < 0 | cottonPart > 100) {
-            throw new CustomException("Содержание хлопка введено некорректно", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Содержание хлопка введено некорректно");
         }
     }
     /**
@@ -32,7 +31,7 @@ public class CheckRequest {
      */
     public static void checkQuantity( int quantity) throws CustomException{
         if (quantity <= 0) {
-            throw new CustomException("Неверное количество", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Неверное количество");
         }
     }
     /**

@@ -2,7 +2,6 @@ package ru.skypro.test_task.sock.warehouse.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.skypro.test_task.sock.warehouse.entity.Operation;
 import ru.skypro.test_task.sock.warehouse.entity.Sock;
@@ -39,7 +38,7 @@ public class SockServiceImpl implements SockService {
             case MORE_THAN: return countQuantities(sockRepository.findByColorAndCottonPartGreaterThan(color, cottonPart));
             case LESS_THAN: return countQuantities(sockRepository.findByColorAndCottonPartLessThan(color, cottonPart));
             case EQUAL: return countQuantities(sockRepository.findByColorAndCottonPartEquals(color, cottonPart));
-            default: throw new CustomException("Операция некорректна", HttpStatus.BAD_REQUEST);
+            default: throw new CustomException("Операция некорректна");
         }
     }
     @Override
@@ -57,7 +56,7 @@ public class SockServiceImpl implements SockService {
     public void outcome(Sock sock) throws CustomException {
         check(sock);
         Sock foundSock= findByColorAndCottonPartEquals(sock.getColor(), sock.getCottonPart()).
-                orElseThrow( () -> new CustomException("Носки с заданными параметрами не найдены", HttpStatus.BAD_REQUEST));
+                orElseThrow( () -> new CustomException("Носки с заданными параметрами не найдены"));
         int difference = foundSock.getQuantity() - sock.getQuantity();
         if (difference > 0) {
             foundSock.setQuantity(difference);
@@ -65,7 +64,7 @@ public class SockServiceImpl implements SockService {
         } else if (difference == 0) {
             delete(foundSock);
         } else {
-            throw new CustomException("Введенное количество превышает найденное", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Введенное количество превышает найденное");
         }
     }
     @Override
